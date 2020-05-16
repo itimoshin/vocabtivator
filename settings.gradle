@@ -1,0 +1,3 @@
+include 'backend'
+findProject(':backend')?.name = 'vocabtivator'
+

@@ -1,0 +1,63 @@
+@import "../../style/colors";
+
+.sentence_practice_root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .vocabtivator_header {
+    flex: 0 0 20%;
+  }
+
+  .vocab_topic_list {
+    flex: 0 0 0;
+  }
+
+  .sentence_practice_footer {
+    text-align: center;
+    flex: 0 0 20%;
+  }
+
+  .vocabtivator_hints {
+    text-align: center;
+  }
+
+  .sentence_box_wrapper {
+    flex: 1 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .sentence_box {
+      display: flex;
+      justify-content: center;
+      .sentence_segment {
+        display: contents;
+        .sentence_segment_text{
+          display: contents;
+        }
+        .sentence_segment_input{
+          display: contents;
+        }
+      }
+      input {
+        padding: 0;
+      }
+    }
+  }
+
+}
+
+
+.hint_first_letter{
+  background: $color_purple;
+}
+.hint_meaning{
+  background: $color_orange;
+}
+.hint_topic{
+  background: $color_blue;
+}
+.hint_answer{
+  background: rgba(255, 0, 0, 0.64);
+}
+

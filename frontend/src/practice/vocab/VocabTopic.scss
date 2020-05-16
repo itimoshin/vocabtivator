@@ -1,0 +1,11 @@
+@import "../../style/colors";
+
+.vocab_topic_list {
+  .vocab_topic_button {
+    background: $color_gray;
+  }
+
+  .vocab_topic_button_enabled {
+    background: $color_green;
+  }
+}

@@ -1,0 +1,22 @@
+@import "colors";
+
+.vocab_switch {
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.vocab_button {
+  background: #f0f2f5 no-repeat 50%;
+  border: 1px solid #d3d9de;
+  border-radius: 0 2px 2px 0;
+  height: 28px;
+  min-width: 120px
+}
+
+.vocab_button_inline {
+  margin: 5px;
+  display: inline-block;
+}
