@@ -1,9 +1,15 @@
 export type HintType = 'FIRST_LETTER' | 'MEANING' | 'TOPIC' | 'ANSWER'
 
+export interface ReduxAction<T> {
+    type: string;
+    data: T
+}
+
 export interface Hint {
     type: HintType;
     text: string;
     hintUi: HintUI;
+    show: boolean;
 }
 
 export interface HintUI {
@@ -11,11 +17,13 @@ export interface HintUI {
     typeName: string
 }
 
+export interface Sentence {
+    text: string,
+    placeholders: string[]
+}
+
 export interface SentenceWithHint {
-    sentence: {
-        text: string,
-        placeholders: string[]
-    }
+    sentence: Sentence
     hints: Hint[]
 }
 
@@ -24,12 +32,12 @@ export interface VocabTableDTO {
     topics: string[];
 }
 
-export interface VocabTopic {
-    name: string
-    enabled: boolean
-}
-
 export interface VocabTable {
     key: string;
     topics: VocabTopic[];
+}
+
+export interface VocabTopic {
+    name: string
+    enabled: boolean
 }

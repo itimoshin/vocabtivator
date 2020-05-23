@@ -1,5 +1,7 @@
 import React from 'react';
 import {VocabTopic} from "../../model/models";
+import {connect} from "react-redux"
+import {switchTopic} from "../../redux/actions";
 
 interface Properties {
     topic: VocabTopic
@@ -8,27 +10,18 @@ interface Properties {
 interface State extends VocabTopic {
 }
 
-export class VocabTopicButton extends React.Component<Properties, State> {
+const VocabTopicButton = (props) => {
 
-    constructor(props: Readonly<Properties>) {
-        super(props);
-        this.state = props.topic;
-    }
 
-    render() {
         return (
-            <div onClick={() => this.switchTopic()}
+            <div onClick={() => switchTopic}
                  className={`vocab_switch
                  vocab_button_inline
                  vocab_topic_button 
-                 ${this.state.enabled ? "vocab_topic_button_enabled" : ""}`}> {this.state.name}</div>)
-    };
+                 ${props.topic.enabled ? "vocab_topic_button_enabled" : ""}`}>
+                {JSON.stringify(props)}
+            </div>
+        );
+};
 
-    getState() {
-        return this.state;
-    }
-
-    switchTopic() {
-        this.setState({enabled: !this.state.enabled});
-    }
-}
+export default connect(null, {switchTopic})(VocabTopicButton)

@@ -1,20 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {HashRouter as Router, Route, Switch} from "react-router-dom";
-
+import {Route, Switch} from "react-router-dom";
+import {Router} from "react-router"
 import './index.css';
 import './style/common.scss'
-import WelcomePage from './WelcomePage';
+import {WelcomePage} from './WelcomePage';
 import * as serviceWorker from './serviceWorker';
 import SentencePractice from "./practice/sentence/SentencePractice";
 import {Provider} from "react-redux";
+import {store} from "./redux/redux-store";
+import createBrowserHistory from 'history/createBrowserHistory'
+
+export const appHistory = createBrowserHistory()
 
 
 ReactDOM.render(
-    <Provider>
+    <Provider store={store}>
         <div className="vocabtivator_root">
             <React.StrictMode>
-                <Router>
+                <Router history={appHistory}>
                     <Switch>
                         <Route exact path="/">
                             <WelcomePage/>

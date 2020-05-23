@@ -1,21 +1,13 @@
 import React from 'react';
 import './App.scss';
-import GoogleSpreadsheet from './vocab/GoogleSpreadsheet'
-import UploadXls from './vocab/UploadXls'
+import UploadXlsButton from './vocab/UploadXlsButton'
+import {UploadGoogleSpreadsheedButton} from "./vocab/GoogleSpreadsheet";
 
-export class WelcomePage extends React.Component {
-
-    render() {
-        return (
-            <div className="App">
-
-                <GoogleSpreadsheet></GoogleSpreadsheet>
-                <UploadXls></UploadXls>
-            </div>
-        );
-    }
-
-
-}
-
-export default WelcomePage;
+export const WelcomePage = () => {
+    return (
+        <div className="App">
+            <UploadGoogleSpreadsheedButton/>
+            <UploadXlsButton/>
+        </div>
+    );
+};

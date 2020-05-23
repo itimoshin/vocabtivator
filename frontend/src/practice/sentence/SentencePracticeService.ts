@@ -1,5 +1,5 @@
 import {HttpService} from "../../HttpService";
-import {Hint, HintType, HintUI, SentenceWithHint} from "../../model/models";
+import {HintType, HintUI, SentenceWithHint} from "../../model/models";
 import {AxiosResponse} from "axios";
 
 export class SentencePracticeService {

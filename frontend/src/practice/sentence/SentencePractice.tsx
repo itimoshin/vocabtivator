@@ -1,11 +1,12 @@
 import React from 'react';
 import {SentenceWithHint, VocabTable} from "../../model/models";
-import {useHistory} from "react-router-dom";
 import {SentencePracticeService} from "./SentencePracticeService";
-import {VocabTopicList} from "../vocab/VocabTopicList";
-import {HintComponent} from "../HintComponent";
+import VocabTopicList from "../vocab/VocabTopicList";
+import HintComponent from "../HintComponent";
 import './SentencePractice.scss'
 import update from 'immutability-helper';
+import {setHints, setSentence} from "../../redux/actions";
+import {connect} from "react-redux"
 
 interface Properties {
     history: any
@@ -18,15 +19,12 @@ interface State {
 
 }
 
-class SentencePractice extends React.Component<Properties, State> {
+const SentencePractice = (props) => {
 
-    private readonly vocabListRef = React.createRef<VocabTopicList>();
+    //private readonly vocabListRef = React.createRef<VocabTopicList>();
 
-    constructor(props: Readonly<Properties>) {
-        super(props);
-    }
 
-    componentDidMount() {
+    /*componentDidMount() {
         this.setState({
             vocabTable: {
                 key: this.props.history.location.vocabTable.key,
@@ -36,54 +34,69 @@ class SentencePractice extends React.Component<Properties, State> {
             },
             inputValue: []
         }, () => this.nextSentence());
-    }
+    }*/
 
     /*
         handlePressEnter(e: any) {
             debugger
         }*/
 
-    render() {
-        return (
-            <div className="sentence_practice_root">
-                <h1 className="vocabtivator_header">Sentence practice</h1>
-                <VocabTopicList ref={this.vocabListRef} topics={this.state?.vocabTable.topics}/>
-                <div className="sentence_box_wrapper">
-                    <div className="sentence_box">
-                        {this.state?.sentence?.sentence.text.split(/{\d}/).map((text, i, arr) =>
-                            i === arr.length - 1 ?
-                                <div className="sentence_segment" key={i}>
-                                    {text}
-                                </div>
-                                : <div className="sentence_segment" key={i}>
-                                    {text}<input type="text" value={this.state.inputValue[i]} onChange={(e) => {
-                                        let value = e.target.value;
-                                        this.setState((state) => {
-                                            debugger;
-                                            update(state, {inputValue: {[i]: {$set: value}}})
-                                        })
-                                }}/>
-                                </div>)}
-                    </div>
-                    <div className="vocabtivator_hints">
-                        {this.state?.sentence?.hints.map((h, i) => <HintComponent key={i + "_" + new Date().getDate()}
-                                                                                  hint={h}/>)}
-                    </div>
+    return (
+        <div className="sentence_practice_root">
+            <h1 className="vocabtivator_header">Sentence practice</h1>
+            <VocabTopicList/>
+            <div className="sentence_box_wrapper">
+                <div className="sentence_box">
+                    {props?.sentence?.sentence.text.split(/{\d}/).map((text, i, arr) =>
+                        i === arr.length - 1 ?
+                            <div className="sentence_segment" key={i}>
+                                {text}
+                            </div>
+                            : <div className="sentence_segment" key={i}>
+                                {text}<input type="text" value={this.state.inputValue[i]} onChange={(e) => {
+                                    let value = e.target.value;
+                                    this.setState((state) => {
+                                        debugger;
+                                        update(state, {inputValue: {[i]: {$set: value}}})
+                                    })
+                            }}/>
+                            </div>)}
                 </div>
-                <div className="sentence_practice_footer">
-                    <button className="vocab_button" onClick={() => this.nextSentence()}>Next sentence</button>
+                <div className="vocabtivator_hints">
+                    {props?.sentence?.hints.map((h, i) => <HintComponent key={i + "_" + new Date().getDate()}
+                                                                              hint={h}/>)}
                 </div>
             </div>
-        )
-    };
+            <div className="sentence_practice_footer">
+                <button className="vocab_button" onClick={nextSentence}>Next sentence</button>
+            </div>
+        </div>
+    )
 
-    private nextSentence() {
-        const enabledTopics = this.vocabListRef.current.getState().filter(v => v.enabled).map(v => v.name);
-        return new SentencePracticeService().nextSentence(this.state.vocabTable.key, enabledTopics).then(resp => this.setState({sentence: resp}))
+    function nextSentence() {
+        //const enabledTopics = this.vocabListRef.current.getState().filter(v => v.enabled).map(v => v.name);
+        const enabledTopics = [];
+        debugger
+        return new SentencePracticeService().nextSentence(props.vocab.key, enabledTopics).then(resp => this.setState({sentence: resp}))
     }
 }
 
-export default function (props) {
-    const history = useHistory();
-    return <SentencePractice {...props} history={history}/>;
+function mapStateToProps({router, sentence, vocab}) {
+
+/*    var isFetching = athletes.isFetching
+    var items = athletes.items
+    var lastUpdated = athletes.lastUpdated
+
+    return {
+        isFetching,
+        items,
+        lastUpdated
+    }*/
+    return {sentence, vocab}
 }
+
+export default connect(
+    mapStateToProps,
+    {setHints, setSentence}
+)(SentencePractice);
+

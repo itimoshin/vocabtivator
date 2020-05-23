@@ -1,7 +1,8 @@
 import React from 'react';
 import {VocabTopic} from "../../model/models";
-import {VocabTopicButton} from "./VocabTopicButton";
+import VocabTopicButton from "./VocabTopicButton";
 import './VocabTopic.scss'
+import {connect} from "react-redux"
 
 interface Properties {
     topics: VocabTopic[]
@@ -10,26 +11,17 @@ interface Properties {
 interface State {
 }
 
-export class VocabTopicList extends React.Component<Properties, State> {
+const VocabTopicList = (props) => {
 
-    private childrenRefs = [];
+    return (
+        <div className="vocab_topic_list">
+            {JSON.stringify(props)}
+            {props.topics.map((t, i) => <VocabTopicButton key={i} topic={t}/>)}
+        </div>)
+};
 
-    constructor(props: Readonly<Properties>) {
-        super(props);
-    }
-
-    setRef(ref, i) {
-        this.childrenRefs[i] = ref;
-    };
-
-    getState() {
-        return this.childrenRefs.map(c => c.getState())
-    }
-
-    render() {
-        return (
-            <div className="vocab_topic_list">
-                {this.props.topics?.map((t, i) => <VocabTopicButton key={i} topic={t} ref={(r) => this.setRef(r, i)}/>)}
-            </div>)
-    };
+function mapStateToProps({vocab}) {
+    return {topics: vocab.topics}
 }
+
+export default connect(mapStateToProps)(VocabTopicList)
