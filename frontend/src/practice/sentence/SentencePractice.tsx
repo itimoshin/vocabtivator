@@ -5,8 +5,9 @@ import VocabTopicList from "../vocab/VocabTopicList";
 import HintComponent from "../HintComponent";
 import './SentencePractice.scss'
 import update from 'immutability-helper';
-import {setHints, setSentence} from "../../redux/actions";
+import {setHints, setSentence} from "../../redux/actions/actions";
 import {connect} from "react-redux"
+import {AjaxState} from "../../redux/types";
 
 interface Properties {
     history: any
@@ -19,7 +20,7 @@ interface State {
 
 }
 
-const SentencePractice = (props) => {
+const SentencePractice = (props: {vocab: AjaxState<VocabTable>, [key: string]: any}) => {
 
     //private readonly vocabListRef = React.createRef<VocabTopicList>();
 
@@ -46,7 +47,7 @@ const SentencePractice = (props) => {
             <h1 className="vocabtivator_header">Sentence practice</h1>
             <VocabTopicList/>
             <div className="sentence_box_wrapper">
-                <div className="sentence_box">
+                {/*<div className="sentence_box">
                     {props?.sentence?.sentence.text.split(/{\d}/).map((text, i, arr) =>
                         i === arr.length - 1 ?
                             <div className="sentence_segment" key={i}>
@@ -56,12 +57,11 @@ const SentencePractice = (props) => {
                                 {text}<input type="text" value={this.state.inputValue[i]} onChange={(e) => {
                                     let value = e.target.value;
                                     this.setState((state) => {
-                                        debugger;
                                         update(state, {inputValue: {[i]: {$set: value}}})
                                     })
                             }}/>
                             </div>)}
-                </div>
+                </div>*/}
                 <div className="vocabtivator_hints">
                     {props?.sentence?.hints.map((h, i) => <HintComponent key={i + "_" + new Date().getDate()}
                                                                               hint={h}/>)}
@@ -76,8 +76,7 @@ const SentencePractice = (props) => {
     function nextSentence() {
         //const enabledTopics = this.vocabListRef.current.getState().filter(v => v.enabled).map(v => v.name);
         const enabledTopics = [];
-        debugger
-        return new SentencePracticeService().nextSentence(props.vocab.key, enabledTopics).then(resp => this.setState({sentence: resp}))
+        return new SentencePracticeService().nextSentence(props.vocab.data.key, enabledTopics).then(resp => this.setState({sentence: resp}))
     }
 }
 

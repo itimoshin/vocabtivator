@@ -1,30 +1,39 @@
-import {VocabTable, VocabTopic} from "../../model/models";
+import {Sentence, VocabTable, VocabTopic} from "../../model/models";
 import {VocabActionType} from "../actions/actionTypes";
 import {SwitchTopicActionData, UploadXlsTableReceiveActionData} from "../action-data/topic-actions-data";
-import {ReducerMethod, TypedReducer} from "../types";
+import {AjaxState, ReducerMethod, TypedReducer} from "../types";
 
 
 export const vocabReducer = (state = null, action) => {
-    debugger;
     return new VocabReducer().reduce(state, action);
 }
 
-class VocabReducer extends TypedReducer<VocabTable, VocabActionType> {
-    factory(): Map<VocabActionType, ReducerMethod<VocabTable>> {
-        const result = new Map<VocabActionType, ReducerMethod<VocabTable>>();
+class VocabReducer extends TypedReducer<AjaxState<VocabTable>, VocabActionType> {
+    factory(): Map<VocabActionType, ReducerMethod<AjaxState<VocabTable>>> {
+        const result = new Map<VocabActionType, ReducerMethod<AjaxState<VocabTable>>>();
         result.set("UPLOAD_XLS_TABLE_RECEIVE", this.uploadXlsTableReceive);
+        result.set("UPLOAD_XLS_TABLE_REQUEST", this.uploadXlsTableRequest);
+        result.set("UPLOAD_XLS_TABLE_FAIL", this.uploadXlsTableFail);
         result.set("SWITCH_TOPIC", this.switchTopic);
         return result;
     }
 
-    private switchTopic(state: VocabTable, action: SwitchTopicActionData): VocabTable {
-        const topic: VocabTopic = action.data;
-        topic.enabled = !topic.enabled;
-        const topicIdx = state.topics.indexOf(topic);
-        return {...state, topics: {...state.topics, [topicIdx]: topic}};
+    private switchTopic(state: AjaxState<VocabTable>, action: SwitchTopicActionData): AjaxState<VocabTable> {
+        const topicIdx = state.data.topics.indexOf(action.data);
+        const topicsClone = [...state.data.topics];
+        topicsClone[topicIdx].enabled = !topicsClone[topicIdx].enabled;
+        return {...state, data: {...state.data, topics: topicsClone}};
     }
 
-    private uploadXlsTableReceive(state: VocabTable, action: UploadXlsTableReceiveActionData): VocabTable {
-        return action.data;
+    private uploadXlsTableRequest(state: AjaxState<VocabTable>, action: UploadXlsTableReceiveActionData): AjaxState<VocabTable> {
+        return {...state, isFetching: true};
+    }
+
+    private uploadXlsTableFail(state: AjaxState<VocabTable>, action: UploadXlsTableReceiveActionData): AjaxState<VocabTable> {
+        return {...state, isFetching: false};
+    }
+
+    private uploadXlsTableReceive(state: AjaxState<VocabTable>, action: UploadXlsTableReceiveActionData): AjaxState<VocabTable> {
+        return {...state, data: action.data, isFetching: false, lastUpdate: new Date()};
     }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {showHint} from "../redux/actions";
+import {showHint} from "../redux/actions/actions";
 
 
 const HintComponent  = (props: any) => {

@@ -1,14 +1,14 @@
 import {HintActionType} from "../actions/actionTypes";
 import {Hint} from "../../model/models";
-import {TypedActionData} from "../types";
+import {AbstractAction} from "../types";
 
-export class SetHintsActionData extends TypedActionData<Hint[], HintActionType> {
+export class SetHintsActionData extends AbstractAction<Hint[], HintActionType> {
     getType(): HintActionType {
         return "SET_HINTS";
     }
 }
 
-export class ShowHintActionData extends TypedActionData<Hint, HintActionType> {
+export class ShowHintActionData extends AbstractAction<Hint, HintActionType> {
     getType(): HintActionType {
         return "SHOW_HINT";
     }

@@ -1,8 +1,9 @@
 import React from 'react';
-import {VocabTopic} from "../../model/models";
+import {VocabTable, VocabTopic} from "../../model/models";
 import VocabTopicButton from "./VocabTopicButton";
 import './VocabTopic.scss'
 import {connect} from "react-redux"
+import {AjaxState} from "../../redux/types";
 
 interface Properties {
     topics: VocabTopic[]
@@ -15,13 +16,12 @@ const VocabTopicList = (props) => {
 
     return (
         <div className="vocab_topic_list">
-            {JSON.stringify(props)}
             {props.topics.map((t, i) => <VocabTopicButton key={i} topic={t}/>)}
         </div>)
 };
 
 function mapStateToProps({vocab}) {
-    return {topics: vocab.topics}
+    return {topics: vocab.data?.topics || []}
 }
 
 export default connect(mapStateToProps)(VocabTopicList)

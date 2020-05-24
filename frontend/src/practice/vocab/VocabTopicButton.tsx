@@ -1,27 +1,30 @@
 import React from 'react';
-import {VocabTopic} from "../../model/models";
 import {connect} from "react-redux"
-import {switchTopic} from "../../redux/actions";
-
-interface Properties {
-    topic: VocabTopic
-}
-
-interface State extends VocabTopic {
-}
+import {bindActionCreators} from 'redux';
+import {SwitchTopicActionData} from "../../redux/action-data/topic-actions-data";
+import * as actions from "../../redux/actions/actions";
 
 const VocabTopicButton = (props) => {
 
-
-        return (
-            <div onClick={() => switchTopic}
-                 className={`vocab_switch
+    return (
+        <div onClick={() => props.actions.genericAction(new SwitchTopicActionData(props.topic))}
+             className={`vocab_switch
                  vocab_button_inline
                  vocab_topic_button 
                  ${props.topic.enabled ? "vocab_topic_button_enabled" : ""}`}>
-                {JSON.stringify(props)}
-            </div>
-        );
+            {props.topic.name}
+        </div>
+    );
 };
+const mapStateToProps = ({vocab}) => {
+    return {vocab}
+};
+const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators(actions, dispatch)
+});
 
-export default connect(null, {switchTopic})(VocabTopicButton)
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(VocabTopicButton);

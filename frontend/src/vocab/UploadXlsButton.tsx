@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
+import { bindActionCreators } from 'redux';
 import {connect} from "react-redux";
 import {useHistory} from 'react-router-dom'
-import {uploadXlsVocabRequest} from "../redux/actions";
-
+import * as xlsActions from "../redux/actions/xlsActions";
 
 const UploadXlsButton = (props) => {
 
@@ -12,10 +12,7 @@ const UploadXlsButton = (props) => {
     function uploadFile() {
         fileUploadRef.current.click();
         fileUploadRef.current.onchange = (event: any) => {
-            props.dispatch(uploadXlsVocabRequest(event.target.files[0]))
-/*            new VocabService().uploadXls(event.target.files[0]).then((vocabTable) => {
-                history.push({pathname: '/practice/sentence', vocabTable: vocabTable})
-            });*/
+            props.actions.uploadXlsVocabRequest(event.target.files[0]);
         }
     }
 
@@ -32,20 +29,15 @@ const UploadXlsButton = (props) => {
 
 };
 
-function mapStateToProps(state, ownProps) {
-    // component receives additionally:
-    return {/* vocab: state.vocab */}
-}
-/*
+const mapStateToProps = ({vocab}) => {
+    return {vocab}
+};
+const mapDispatchToProps = (dispatch) => ({
+    actions : bindActionCreators(xlsActions, dispatch)
+});
 
-function mapDispatchToProps (state, ownProps) {
-    // component receives additionally:
-    return { vocab: state.vocab }
-}
-
-*/
 
 export default connect(
     mapStateToProps,
-    // mapDispatchToProps
+    mapDispatchToProps
 )(UploadXlsButton);

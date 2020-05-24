@@ -3,9 +3,12 @@ import {GOOGLE_SPREADSHEET_API} from "../config";
 import {VocabService} from "./VocabService";
 import {VocabTableDTO} from "../model/models";
 import {useHistory} from 'react-router-dom'
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
+import * as xlsActions from "../redux/actions/xlsActions";
 
 
-export const UploadGoogleSpreadsheedButton = (props) => {
+const UploadGoogleSpreadsheedButton = (props) => {
     let pickerApiLoaded = false;
     let oauthToken: any;
     const scope = ['https://www.googleapis.com/auth/drive.readonly'];
@@ -79,3 +82,17 @@ export const UploadGoogleSpreadsheedButton = (props) => {
         }
     }
 };
+
+const mapStateToProps = ({vocab}) => {
+    return {vocab}
+};
+const mapDispatchToProps = (dispatch) => ({
+    actions : bindActionCreators(xlsActions, dispatch)
+});
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(UploadGoogleSpreadsheedButton);
+
