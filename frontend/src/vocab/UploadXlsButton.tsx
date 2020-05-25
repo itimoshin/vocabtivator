@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { bindActionCreators } from 'redux';
+import {bindActionCreators} from 'redux';
 import {connect} from "react-redux";
 import {useHistory} from 'react-router-dom'
 import * as xlsActions from "../redux/actions/xlsActions";

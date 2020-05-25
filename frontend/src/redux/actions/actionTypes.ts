@@ -6,5 +6,5 @@ export const UPLOAD_XLS_TABLE_RECEIVE = "UPLOAD_XLS_TABLE_RECEIVE";
 export const SWITCH_TOPIC = "SWITCH_TOPIC";
 
 export type VocabActionType = "SWITCH_TOPIC" | "UPLOAD_XLS_TABLE_REQUEST" | "UPLOAD_XLS_TABLE_RECEIVE" | "UPLOAD_XLS_TABLE_FAIL";
-export type SentenceActionType = "SET_SENTENCE";
+export type SentenceActionType = "NEXT_SENTENCE_REQUEST" | "NEXT_SENTENCE_RECEIVE" | "NEXT_SENTENCE_FAIL" | "CHANGE_INPUT_VALUE";
 export type HintActionType = "SET_HINTS" | "SHOW_HINT";

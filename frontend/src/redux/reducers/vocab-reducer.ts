@@ -1,4 +1,4 @@
-import {Sentence, VocabTable, VocabTopic} from "../../model/models";
+import {VocabTable} from "../../model/models";
 import {VocabActionType} from "../actions/actionTypes";
 import {SwitchTopicActionData, UploadXlsTableReceiveActionData} from "../action-data/topic-actions-data";
 import {AjaxState, ReducerMethod, TypedReducer} from "../types";

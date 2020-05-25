@@ -1,18 +1,5 @@
-import {
-    SET_HINTS,
-    SET_SENTENCE,
-    SHOW_HINT,
-    UPLOAD_XLS_TABLE_RECEIVE,
-    UPLOAD_XLS_TABLE_REQUEST
-} from "./actionTypes";
-import {Hint, SentenceWithHint, VocabTable, VocabTopic} from "../../model/models";
-import {VocabService} from "../../vocab/VocabService";
-import {appHistory} from "../../index";
-import {
-    UploadXlsTableFailActionData,
-    UploadXlsTableReceiveActionData,
-    UploadXlsTableRequestActionData
-} from "../action-data/topic-actions-data";
+import {SET_HINTS, SET_SENTENCE, SHOW_HINT} from "./actionTypes";
+import {Hint, SentenceWithHint, VocabTopic} from "../../model/models";
 import {AbstractAction} from "../types";
 
 
@@ -36,9 +23,6 @@ export const switchTopic = (topic: VocabTopic) => ({
     data: topic
 });
 
-export const genericAction = (actionData: AbstractAction<any, any>) => {
-    debugger
-    return dispatch => {
-        dispatch(actionData.toObject());
-    };
-}
+export const genericAction = (actionData: AbstractAction<any, any>) => dispatch => {
+    dispatch(actionData.toObject());
+};

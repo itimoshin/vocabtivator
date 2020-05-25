@@ -1,9 +1,8 @@
 import React from 'react';
-import {VocabTable, VocabTopic} from "../../model/models";
+import {VocabTopic} from "../../model/models";
 import VocabTopicButton from "./VocabTopicButton";
 import './VocabTopic.scss'
 import {connect} from "react-redux"
-import {AjaxState} from "../../redux/types";
 
 interface Properties {
     topics: VocabTopic[]
