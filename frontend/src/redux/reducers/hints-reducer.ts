@@ -19,7 +19,8 @@ class HintsReducer extends TypedReducer<Hint[], HintActionType> {
     }
 
     private showHint(state: Hint[], action: ShowHintActionData): Hint[] {
-        const idx = state.indexOf(action.data);
-        return {...state, [idx]: {...state[idx], show: true}}
+        const stateClone = [...state];
+        stateClone[state.indexOf(action.data)].show = true;
+        return stateClone;
     }
 }

@@ -1,8 +1,5 @@
 import React from 'react';
 import {GOOGLE_SPREADSHEET_API} from "../config";
-import {VocabService} from "./VocabService";
-import {VocabTableDTO} from "../model/models";
-import {useHistory} from 'react-router-dom'
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import * as xlsActions from "../redux/actions/xlsActions";
@@ -12,7 +9,6 @@ const UploadGoogleSpreadsheedButton = (props) => {
     let pickerApiLoaded = false;
     let oauthToken: any;
     const scope = ['https://www.googleapis.com/auth/drive.readonly'];
-    const history = useHistory();
 
     return (
         <button className={"vocab_button"} onClick={() => showGoogleFilesDialog()}>
@@ -55,11 +51,11 @@ const UploadGoogleSpreadsheedButton = (props) => {
     // Create and render a Picker object for searching images.
     function createPicker() {
         if (pickerApiLoaded && oauthToken) {
-            var view = new window.google.picker.View(window.google.picker.ViewId.DOCS);
+            const view = new window.google.picker.View(window.google.picker.ViewId.DOCS);
             view.setMimeTypes("application/vnd.ms-excel" +
                 ",application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" +
                 ",application/vnd.google-apps.spreadsheet");
-            var picker = new window.google.picker.PickerBuilder()
+            const picker = new window.google.picker.PickerBuilder()
                 .enableFeature(window.google.picker.Feature.NAV_HIDDEN)
                 .enableFeature(window.google.picker.Feature.MULTISELECT_ENABLED)
                 .setAppId(GOOGLE_SPREADSHEET_API.APP_ID)
@@ -76,9 +72,7 @@ const UploadGoogleSpreadsheedButton = (props) => {
     // A simple callback implementation.
     function pickerCallback(data: any) {
         if (data.action === window.google.picker.Action.PICKED) {
-            new VocabService().uploadGoogleSpreadsheet(data.docs[0].id, oauthToken).then((vocabTable: VocabTableDTO) => {
-                history.push({pathname: '/practice/sentence', vocabTable: vocabTable})
-            })
+            props.actions.uploadGoogleSpreadsheetRequest(data.docs[0].id, oauthToken);
         }
     }
 };

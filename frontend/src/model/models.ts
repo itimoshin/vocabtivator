@@ -22,15 +22,14 @@ export interface Sentence {
     placeholders: string[]
 }
 
-export interface SentenceWithInput {
-    text: string,
-    placeholders: string[]
-}
 
+export interface SentenceWithInputs {
+    sentence: Sentence,
+    inputs: {value: string, invalid: boolean}[]
+}
 
 export interface SentenceWithHint {
     sentence: Sentence
-    inputs: string[]
     hints: Hint[]
 }
 

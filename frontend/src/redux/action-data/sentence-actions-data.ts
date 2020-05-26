@@ -1,6 +1,6 @@
 import {SentenceActionType} from "../actions/actionTypes";
 import {AbstractAction} from "../types";
-import {Sentence, SentenceWithHint} from "../../model/models";
+import {Sentence} from "../../model/models";
 
 export type SentenceRequest = {tableKey: string, topics: string[]};
 export type ChangedInputValue = [string, number]//{newValue: string, index: number};
@@ -11,7 +11,7 @@ export class NextSentenceRequestAction extends AbstractAction<SentenceRequest, S
     }
 }
 
-export class NextSentenceReceiveAction extends AbstractAction<SentenceWithHint, SentenceActionType> {
+export class NextSentenceReceiveAction extends AbstractAction<Sentence, SentenceActionType> {
     getType(): SentenceActionType {
         return "NEXT_SENTENCE_RECEIVE";
     }

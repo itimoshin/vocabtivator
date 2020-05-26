@@ -28,8 +28,7 @@ export const uploadGoogleSpreadsheetRequest = (fileId, oauthToken) => dispatch =
             topics: vocabTableResp.topics.map((it) => ({name: it, enabled: false}))
         };
         appHistory.push({pathname: '/practice/sentence'})
-        return dispatch(new UploadXlsTableReceiveActionData(vocabTable).toObject());
-
+        dispatch(new UploadXlsTableReceiveActionData(vocabTable).toObject());
     }).catch(() => dispatch(new UploadXlsTableFailActionData().toObject()));
 };
 

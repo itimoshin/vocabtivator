@@ -1,0 +1,18 @@
+@import "../../style/colors";
+
+.vocabtivator_hints {
+  text-align: center;
+
+  .hint_first_letter{
+    background: $color_purple;
+  }
+  .hint_meaning{
+    background: $color_orange;
+  }
+  .hint_topic{
+    background: $color_blue;
+  }
+  .hint_answer{
+    background: rgba(255, 0, 0, 0.64);
+  }
+}
