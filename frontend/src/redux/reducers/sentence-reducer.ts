@@ -24,7 +24,7 @@ class SentenceReducer extends TypedReducer<AjaxState<SentenceWithInputs>, Senten
     }
 
     private nextSentenceReceive(state: AjaxState<SentenceWithInputs>, action: NextSentenceReceiveAction): AjaxState<SentenceWithInputs> {
-        const inputs = Array(action.data.placeholders.length).map(() => ({value: '', invalid: false}));
+        const inputs =  Array.from({length: action.data.placeholders.length},() => ({value: '', invalid: false}));
         return {...state, isFetching: false, data: {sentence: action.data, inputs: inputs}};
     }
 

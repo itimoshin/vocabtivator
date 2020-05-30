@@ -26,7 +26,7 @@ const SentencePractice = (props: { vocab: AjaxState<VocabTable>, sentence: AjaxS
             <div className="sentence_box_wrapper">
                 <div className="sentence_box">
                     {props.sentence?.data?.sentence.text.split(/{\d}/).map((text, i, arr) =>
-                        (i === arr.length - 1 && arr[i] === '') ?
+                        (i === arr.length - 1 && arr[i] !== '') ?
                             <div className="sentence_segment" key={i}>
                                 {text}
                             </div>
