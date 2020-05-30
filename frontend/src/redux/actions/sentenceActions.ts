@@ -5,6 +5,7 @@ import {
 } from "../action-data/sentence-actions-data";
 import {SentencePracticeService} from "../../practice/sentence/SentencePracticeService";
 import {SetHintsActionData} from "../action-data/hint-actions-data";
+import {SentenceWithInputs} from "../../model/models";
 
 export const nextSentenceRequest = () => (dispatch, getState) => {
     dispatch(new NextSentenceRequestAction().toObject());
@@ -17,10 +18,6 @@ export const nextSentenceRequest = () => (dispatch, getState) => {
 
 
 export const confirmInputs = () => (dispatch, getState) => {
-    dispatch(new NextSentenceRequestAction().toObject());
-    return new SentencePracticeService().nextSentence(getState().vocab.data.key, getState().vocab.data.topics.filter(t => t.enabled).map(v => v.name))
-        .then((resp) => {
-            dispatch(new NextSentenceReceiveAction(resp.sentence).toObject());
-            dispatch(new SetHintsActionData(resp.hints).toObject())
-        }).catch(() => dispatch(new NextSentenceFailAction().toObject()));
+    const sentenceState:SentenceWithInputs = getState().sentence;
+    //sentenceState.
 };

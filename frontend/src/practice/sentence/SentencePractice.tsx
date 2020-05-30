@@ -15,7 +15,9 @@ const SentencePractice = (props: { vocab: AjaxState<VocabTable>, sentence: AjaxS
 
     React.useEffect(() => {
         props.actions.nextSentenceRequest();
-    },[]);
+    }, []);
+
+    let x = 0;
 
     return (
         <div className="sentence_practice_root">
@@ -24,7 +26,7 @@ const SentencePractice = (props: { vocab: AjaxState<VocabTable>, sentence: AjaxS
             <div className="sentence_box_wrapper">
                 <div className="sentence_box">
                     {props.sentence?.data?.sentence.text.split(/{\d}/).map((text, i, arr) =>
-                        i === arr.length - 1 ?
+                        (i === arr.length - 1 && arr[i] === '') ?
                             <div className="sentence_segment" key={i}>
                                 {text}
                             </div>
@@ -37,7 +39,7 @@ const SentencePractice = (props: { vocab: AjaxState<VocabTable>, sentence: AjaxS
                 <HintsListComponent/>
             </div>
             <div className="sentence_practice_footer">
-                <button className="vocab_button" onClick={props.actions.nextSentenceRequest}>Confirm</button>
+                <button className="vocab_button" onClick={props.actions.confirmInputs}>Confirm</button>
                 <button className="vocab_button" onClick={props.actions.nextSentenceRequest}>Next sentence</button>
             </div>
         </div>
