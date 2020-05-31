@@ -2,7 +2,7 @@ import {SentenceActionType} from "../actions/actionTypes";
 import {SentenceWithInputs} from "../../model/models";
 import {AjaxState, ReducerMethod, TypedReducer} from "../types";
 import {
-    ChangeSentenceInputAction,
+    ChangeSentenceInputAction, MarkInvalidInputsAction,
     NextSentenceReceiveAction,
     NextSentenceRequestAction
 } from "../action-data/sentence-actions-data";
@@ -15,7 +15,7 @@ class SentenceReducer extends TypedReducer<AjaxState<SentenceWithInputs>, Senten
         result.set("NEXT_SENTENCE_REQUEST", this.nextSentenceRequest);
         result.set("NEXT_SENTENCE_RECEIVE", this.nextSentenceReceive);
         result.set("NEXT_SENTENCE_FAIL", this.nextSentenceFail);
-        result.set("CHANGE_INPUT_VALUE", this.changeInputValue);
+        result.set("MARK_INVALID_INPUTS", this.markInvalidInputs);
         return result;
     }
 
@@ -36,6 +36,15 @@ class SentenceReducer extends TypedReducer<AjaxState<SentenceWithInputs>, Senten
         const [value, idx] = action.data;
         const inputsClone = [...state.data.inputs];
         inputsClone[idx].value = value;
+        return {...state, data: {...state.data, inputs: inputsClone}};
+    }
+
+    private markInvalidInputs(state: AjaxState<SentenceWithInputs>, action: MarkInvalidInputsAction): AjaxState<SentenceWithInputs> {
+        const indexes = action.data;
+        const inputsClone = [...state.data.inputs];
+        inputsClone.forEach((input, i) => {
+            input.invalid = indexes.indexOf(i) === -1;
+        });
         return {...state, data: {...state.data, inputs: inputsClone}};
     }
 }

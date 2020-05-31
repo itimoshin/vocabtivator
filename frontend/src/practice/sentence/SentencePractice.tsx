@@ -8,32 +8,33 @@ import {connect} from "react-redux"
 import {AjaxState} from "../../redux/types";
 import {bindActionCreators} from "redux";
 import {ChangeSentenceInputAction} from "../../redux/action-data/sentence-actions-data";
-import {nextSentenceRequest} from "../../redux/actions/sentenceActions";
+import {confirmInputs, nextSentenceRequest} from "../../redux/actions/sentenceActions";
 import HintsListComponent from "../hint/HintsListComponent";
 
 const SentencePractice = (props: { vocab: AjaxState<VocabTable>, sentence: AjaxState<SentenceWithInputs>, hints: Hint[], [key: string]: any }) => {
 
     React.useEffect(() => {
-        props.actions.nextSentenceRequest();
-    }, []);
+                                props.actions.nextSentenceRequest();
+                                }, []);
 
-    let x = 0;
+                                let x = 0;
 
-    return (
-        <div className="sentence_practice_root">
-            <h1 className="vocabtivator_header">Sentence practice</h1>
-            <VocabTopicList/>
-            <div className="sentence_box_wrapper">
-                <div className="sentence_box">
-                    {props.sentence?.data?.sentence.text.split(/{\d}/).map((text, i, arr) =>
-                        (i === arr.length - 1 && arr[i] !== '') ?
-                            <div className="sentence_segment" key={i}>
-                                {text}
-                            </div>
-                            : <div className="sentence_segment" key={i}>
-                                {text}<input type="text" value={props.sentence.data?.inputs[i].value} onChange={(e) => {
-                                props.actions.genericAction(new ChangeSentenceInputAction([e.target.value, i]))
-                            }}/>
+                                return (
+                                <div className="sentence_practice_root">
+                                    <h1 className="vocabtivator_header">Sentence practice</h1>
+                                    <VocabTopicList/>
+                                    <div className="sentence_box_wrapper">
+                                        <div className="sentence_box">
+                                            {props.sentence?.data?.sentence.text.split(/{\d}/).map((text, i, arr) =>
+                                                (i === arr.length - 1 && arr[i] !== '') ?
+                                                    <div className="sentence_segment" key={i}>
+                                                        {text}
+                                                    </div>
+                                                    : <div className="sentence_segment" key={i}>
+                                                        {text}<input type="text" className={`${props.sentence.data?.inputs[i].invalid ? 'invalid_input' : ''}`}
+                                                                     value={props.sentence.data?.inputs[i].value} onChange={(e) => {
+                                                        props.actions.genericAction(new ChangeSentenceInputAction([e.target.value, i]))
+                                                    }}/>
                             </div>)}
                 </div>
                 <HintsListComponent/>
@@ -53,7 +54,8 @@ function mapStateToProps({sentence, vocab, hints}) {
 const mapDispatchToProps = (dispatch) => ({
     actions: {
         genericAction: bindActionCreators(genericAction, dispatch),
-        nextSentenceRequest: bindActionCreators(nextSentenceRequest, dispatch)
+        nextSentenceRequest: bindActionCreators(nextSentenceRequest, dispatch),
+        confirmInputs: bindActionCreators(confirmInputs, dispatch)
     }
 });
 

@@ -25,7 +25,12 @@ export interface Sentence {
 
 export interface SentenceWithInputs {
     sentence: Sentence,
-    inputs: {value: string, invalid: boolean}[]
+    inputs: SentenceInput[]
+}
+
+export interface SentenceInput {
+    value: string,
+    invalid: boolean
 }
 
 export interface SentenceWithHint {

@@ -1,4 +1,5 @@
 import {
+    MarkInvalidInputsAction,
     NextSentenceFailAction,
     NextSentenceReceiveAction,
     NextSentenceRequestAction
@@ -18,6 +19,13 @@ export const nextSentenceRequest = () => (dispatch, getState) => {
 
 
 export const confirmInputs = () => (dispatch, getState) => {
-    const sentenceState:SentenceWithInputs = getState().sentence;
-    //sentenceState.
+    const sentenceState: SentenceWithInputs = getState().sentence;
+    const invalidInputsIndexes = sentenceState.inputs
+        .filter((input, i) => input.value !== sentenceState.sentence.placeholders[i])
+        .map((input, i) => i);
+    if (invalidInputsIndexes.length) {
+        dispatch(new MarkInvalidInputsAction(invalidInputsIndexes))
+    } else {
+        nextSentenceRequest();
+    }
 };
