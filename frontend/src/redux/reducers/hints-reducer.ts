@@ -4,7 +4,7 @@ import {ReducerMethod, TypedReducer} from "../types";
 import {SetHintsActionData, ShowHintActionData} from "../action-data/hint-actions-data";
 
 
-export const hintReducer = (state = [], action) => new HintsReducer().reduce(state, action);
+export const hintReducer = (state: Hint[] = [], action) => new HintsReducer().reduce(state, action);
 
 class HintsReducer extends TypedReducer<Hint[], HintActionType> {
     factory(): Map<HintActionType, ReducerMethod<Hint[]>> {

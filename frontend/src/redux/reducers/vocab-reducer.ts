@@ -4,7 +4,7 @@ import {SwitchTopicActionData, UploadXlsTableReceiveActionData} from "../action-
 import {AjaxState, ReducerMethod, TypedReducer} from "../types";
 
 
-export const vocabReducer = (state = null, action) => {
+export const vocabReducer = (state: AjaxState<VocabTable> = null, action) => {
     return new VocabReducer().reduce(state, action);
 }
 

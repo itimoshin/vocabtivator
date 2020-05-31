@@ -7,7 +7,7 @@ import {
     NextSentenceRequestAction
 } from "../action-data/sentence-actions-data";
 
-export const sentenceReducer = (state = null, action) => new SentenceReducer().reduce(state, action);
+export const sentenceReducer = (state: AjaxState<SentenceWithInputs> = null, action) => new SentenceReducer().reduce(state, action);
 
 class SentenceReducer extends TypedReducer<AjaxState<SentenceWithInputs>, SentenceActionType> {
     factory(): Map<SentenceActionType, ReducerMethod<AjaxState<SentenceWithInputs>>> {
@@ -15,6 +15,7 @@ class SentenceReducer extends TypedReducer<AjaxState<SentenceWithInputs>, Senten
         result.set("NEXT_SENTENCE_REQUEST", this.nextSentenceRequest);
         result.set("NEXT_SENTENCE_RECEIVE", this.nextSentenceReceive);
         result.set("NEXT_SENTENCE_FAIL", this.nextSentenceFail);
+        result.set("CHANGE_INPUT_VALUE", this.changeInputValue);
         result.set("MARK_INVALID_INPUTS", this.markInvalidInputs);
         return result;
     }
@@ -43,7 +44,7 @@ class SentenceReducer extends TypedReducer<AjaxState<SentenceWithInputs>, Senten
         const indexes = action.data;
         const inputsClone = [...state.data.inputs];
         inputsClone.forEach((input, i) => {
-            input.invalid = indexes.indexOf(i) === -1;
+            input.invalid = indexes.indexOf(i) > -1;
         });
         return {...state, data: {...state.data, inputs: inputsClone}};
     }

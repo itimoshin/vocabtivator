@@ -5,7 +5,7 @@ import {sentenceReducer} from "./reducers/sentence-reducer";
 import {vocabReducer} from "./reducers/vocab-reducer";
 
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
     hints: hintReducer,
     sentence: sentenceReducer,
     vocab: vocabReducer
@@ -15,4 +15,5 @@ const middleware = applyMiddleware(thunk);
 const createStoreWithMiddleware = compose(
     middleware
 );
-export const store = createStoreWithMiddleware(createStore)(reducers);
+export const store = createStoreWithMiddleware(createStore)(rootReducer);
+export type RootState = ReturnType<typeof rootReducer>

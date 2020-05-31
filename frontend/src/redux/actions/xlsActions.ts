@@ -31,4 +31,3 @@ export const uploadGoogleSpreadsheetRequest = (fileId, oauthToken) => dispatch =
         dispatch(new UploadXlsTableReceiveActionData(vocabTable).toObject());
     }).catch(() => dispatch(new UploadXlsTableFailActionData().toObject()));
 };
-
