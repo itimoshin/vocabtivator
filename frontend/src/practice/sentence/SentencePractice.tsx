@@ -1,7 +1,6 @@
 import React from 'react';
 import {Hint, SentenceWithInputs, VocabTable} from "../../model/models";
 import VocabTopicList from "../vocab/VocabTopicList";
-import HintComponent from "../hint/HintComponent";
 import './SentencePractice.scss'
 import {genericAction} from "../../redux/actions/actions";
 import {connect} from "react-redux"
@@ -13,9 +12,25 @@ import HintsListComponent from "../hint/HintsListComponent";
 
 const SentencePractice = (props: { vocab: AjaxState<VocabTable>, sentence: AjaxState<SentenceWithInputs>, hints: Hint[], [key: string]: any }) => {
 
+    function handleKeyDown(e: KeyboardEvent) {
+        if (e.key === "Enter") {
+               if (e.shiftKey) {
+                   props.actions.nextSentenceRequest();
+               } else {
+                   props.actions.confirmInputs();
+               }
+        }
+    }
+
+
     React.useEffect(() => {
         props.actions.nextSentenceRequest();
+        document.addEventListener('keydown', handleKeyDown);
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown)
+        }
     }, []);
+
     return (
         <div className="sentence_practice_root">
             <h1 className="vocabtivator_header">Sentence practice</h1>

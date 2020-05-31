@@ -20,7 +20,6 @@ export const nextSentenceRequest = () => (dispatch, getState: () => RootState) =
 
 
 export const confirmInputs = () => (dispatch, getState: () => RootState) => {
-    debugger
     const sentenceState = getState().sentence.data;
     const invalidInputsIndexes = sentenceState.inputs
         .filter((input, i) => input.value !== sentenceState.sentence.placeholders[i])

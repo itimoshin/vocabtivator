@@ -19,9 +19,6 @@ export abstract class AbstractAction<T_DATA, T_TYPE_NAME extends string> {
     }
 }
 
-type ActionCreator<T_DATA, T_TYPE_NAME extends string> = () => AbstractAction<T_DATA, T_TYPE_NAME>;
-
-
 export abstract class TypedReducer<STATE_TYPE, ACTIONS_TYPE extends string> {
     reduce(state: STATE_TYPE, action: AbstractAction<any, ACTIONS_TYPE>) {
         let reducerMethod = this.factory().get(action.type);
