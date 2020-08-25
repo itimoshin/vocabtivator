@@ -2,6 +2,7 @@ import {VocabTable} from "../../model/models";
 import {VocabActionType} from "../actions/actionTypes";
 import {SwitchTopicActionData, UploadXlsTableReceiveActionData} from "../action-data/topic-actions-data";
 import {AjaxState, ReducerMethod, TypedReducer} from "../types";
+import {act} from "react-dom/test-utils";
 
 
 export const vocabReducer = (state: AjaxState<VocabTable> = null, action) => {
@@ -34,6 +35,8 @@ class VocabReducer extends TypedReducer<AjaxState<VocabTable>, VocabActionType> 
     }
 
     private uploadXlsTableReceive(state: AjaxState<VocabTable>, action: UploadXlsTableReceiveActionData): AjaxState<VocabTable> {
+        const randomTopicIndex = Math.floor(Math.random() * action.data.topics.length);
+        action.data.topics[randomTopicIndex].enabled = true;
         return {...state, data: action.data, isFetching: false, lastUpdate: new Date()};
     }
 }

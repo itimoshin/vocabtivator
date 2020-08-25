@@ -2,7 +2,7 @@ package org.bubbasmith.vocabtivator.model.dto;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.bubbasmith.vocabtivator.model.content.Sentence;
+import org.bubbasmith.vocabtivator.model.Sentence;
 
 import java.util.List;
 

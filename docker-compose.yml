@@ -1,0 +1,15 @@
+version: '3'
+services:
+  mongodb:
+    build: mongodb
+    container_name: vocabtivator-mongodb
+    dns:
+      - 8.8.8.8
+  vocab-service:
+    build: vocabtivator-vocab
+    container_name: vocabtivator-vocab
+    dns:
+      - 8.8.8.8
+#  backend-service:
+#    build: backend
+#    container_name: vocabtivator-backend

@@ -12,4 +12,5 @@ public class VocabEntity {
     private String meaning;
     private List<String> examples;
     private String useStrategy;
+    private String topic;
 }
