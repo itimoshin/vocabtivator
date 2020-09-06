@@ -1,0 +1,5 @@
+server.port: ${env.server.port}
+spring.servlet.multipart.enabled: true
+endpoint:
+  vocab: ${env.endpoint.vocab}
+  sentence: ${env.endpoint.sentence}

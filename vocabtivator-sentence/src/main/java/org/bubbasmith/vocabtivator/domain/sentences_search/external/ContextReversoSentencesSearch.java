@@ -22,7 +22,8 @@ public class ContextReversoSentencesSearch implements SentencesSearch {
     private final SentenceRepository sentenceRepository;
 
     public ContextReversoSentencesSearch(ContextReversoHtmlParser contextReversoHtmlParser,
-                                         @Qualifier("htmlRestTemplate") RestTemplate restTemplate, SentenceRepository sentenceRepository) {
+                                         @Qualifier("htmlRestTemplate") RestTemplate restTemplate,
+                                         SentenceRepository sentenceRepository) {
         this.contextReversoHtmlParser = contextReversoHtmlParser;
         this.restTemplate = restTemplate;
         this.sentenceRepository = sentenceRepository;

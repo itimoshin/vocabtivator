@@ -1,8 +1,0 @@
-spring:
-  cloud:
-    gateway:
-      routes:
-        - id: vocab_service_route
-          uri: https://example.org
-          predicates:
-            -

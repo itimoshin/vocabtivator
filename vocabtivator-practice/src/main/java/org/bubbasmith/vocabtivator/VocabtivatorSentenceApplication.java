@@ -2,12 +2,14 @@ package org.bubbasmith.vocabtivator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @SpringBootApplication
-public class VocabtivatorApplication {
+@EnableMongoRepositories
+public class VocabtivatorSentenceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(VocabtivatorApplication.class, args);
+        SpringApplication.run(VocabtivatorSentenceApplication.class, args);
     }
 
 }

@@ -5,11 +5,92 @@ services:
     container_name: vocabtivator-mongodb
     dns:
       - 8.8.8.8
+    hostname: mongodb
+    networks:
+      - mongo_nw
+    volumes:
+      - /Users/itimoshin/mongo/data/db:/data/db
+    ports:
+      - "27017:27017"
+
+  backend-service:
+    build: backend
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000
+    env_file:
+      - ./backend/backend.env
+    container_name: vocabtivator-backend
+    hostname: backend-service
+    networks:
+      - mongo_nw
+      - backend_nw
+    ports:
+      - "8081:8080"
+      - "8001:8000"
+
   vocab-service:
     build: vocabtivator-vocab
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000
+    env_file:
+      - ./vocabtivator-vocab/vocab.env
     container_name: vocabtivator-vocab
+    hostname: vocab-service
+    networks:
+      - mongo_nw
+    ports:
+      - "8082:8080"
+      - "8002:8000"
+    depends_on:
+      - mongodb
+
+  sentence-service:
+    build: vocabtivator-sentence
+    env_file:
+      - ./vocabtivator-sentence/sentence.env
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000
+    container_name: vocabtivator-sentnece
     dns:
       - 8.8.8.8
-#  backend-service:
-#    build: backend
-#    container_name: vocabtivator-backend
+    hostname: sentence-service
+    networks:
+      - mongo_nw
+    ports:
+      - "8083:8080"
+      - "8003:8000"
+    depends_on:
+      - mongodb
+
+  practice-service:
+    build: vocabtivator-practice
+    env_file:
+      - ./vocabtivator-practice/practice.env
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000
+    container_name: vocabtivator-practice
+    dns:
+      - 8.8.8.8
+    hostname: practice-service
+    networks:
+      - mongo_nw
+    ports:
+      - "8084:8080"
+      - "8004:8000"
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: frontend
+    volumes:
+      - "./frontend:/app"
+    env_file:
+      - ./frontend/frontend.env
+    container_name: vocabtivator-frontend
+    hostname: vocabtivator-frontend
+    stdin_open: true
+    ports:
+      - "3000:3000"
+networks:
+  mongo_nw:
+  backend_nw:
