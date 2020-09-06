@@ -1,6 +1,6 @@
-package org.bubbasmith.vocabtivator.domain.sentences_search;
+package org.bubbasmith.vocabtivator.external;
 
-import org.bubbasmith.vocabtivator.domain.sentences_search.external.SentencesSearch;
+import org.bubbasmith.vocabtivator.external.external.SentencesSearch;
 import org.bubbasmith.vocabtivator.model.Sentence;
 import org.springframework.stereotype.Service;
 

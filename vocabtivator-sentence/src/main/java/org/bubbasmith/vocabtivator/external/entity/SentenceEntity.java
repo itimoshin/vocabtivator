@@ -1,4 +1,4 @@
-package org.bubbasmith.vocabtivator.domain.sentences_search.entity;
+package org.bubbasmith.vocabtivator.external.entity;
 
 
 import lombok.Data;

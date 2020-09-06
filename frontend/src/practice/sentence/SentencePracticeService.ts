@@ -8,7 +8,7 @@ export class SentencePracticeService {
     private readonly hintUiMap = this.getHintUiMap();
 
     public nextSentence(tableKey: string, topics: string[]): Promise<SentenceWithHint> {
-        return this.httpService.get('/sentence-service/practice/sentence', {
+        return this.httpService.get('/practice-service/practice/sentence', {
             params: {
                 tableKey: tableKey,
                 topics: topics.join(",")

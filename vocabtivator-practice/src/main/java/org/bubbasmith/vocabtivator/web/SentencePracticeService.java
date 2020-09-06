@@ -1,7 +1,7 @@
 package org.bubbasmith.vocabtivator.web;
 
-import org.bubbasmith.vocabtivator.domain.sentences_search.SentenceServiceClient;
-import org.bubbasmith.vocabtivator.domain.sentences_search.VocabServiceClient;
+import org.bubbasmith.vocabtivator.external.SentenceServiceClient;
+import org.bubbasmith.vocabtivator.external.VocabServiceClient;
 import org.bubbasmith.vocabtivator.hint.HintExtractorService;
 import org.bubbasmith.vocabtivator.model.HintDTO;
 import org.bubbasmith.vocabtivator.model.Sentence;

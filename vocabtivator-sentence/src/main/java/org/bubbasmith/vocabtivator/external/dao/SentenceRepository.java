@@ -1,14 +1,11 @@
-package org.bubbasmith.vocabtivator.domain.sentences_search.dao;
+package org.bubbasmith.vocabtivator.external.dao;
 
 import org.bson.types.ObjectId;
-import org.bubbasmith.vocabtivator.domain.sentences_search.entity.SentenceEntity;
-import org.bubbasmith.vocabtivator.model.Sentence;
+import org.bubbasmith.vocabtivator.external.entity.SentenceEntity;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository

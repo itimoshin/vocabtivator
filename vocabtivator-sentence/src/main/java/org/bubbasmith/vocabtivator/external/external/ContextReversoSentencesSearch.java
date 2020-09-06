@@ -1,9 +1,9 @@
-package org.bubbasmith.vocabtivator.domain.sentences_search.external;
+package org.bubbasmith.vocabtivator.external.external;
 
-import org.bubbasmith.vocabtivator.domain.sentences_search.dao.SentenceRepository;
-import org.bubbasmith.vocabtivator.domain.sentences_search.entity.SentenceEntity;
+import org.bubbasmith.vocabtivator.external.dao.SentenceRepository;
+import org.bubbasmith.vocabtivator.external.entity.SentenceEntity;
 import org.bubbasmith.vocabtivator.model.Sentence;
-import org.bubbasmith.vocabtivator.domain.sentences_search.parser.ContextReversoHtmlParser;
+import org.bubbasmith.vocabtivator.external.parser.ContextReversoHtmlParser;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

@@ -17,6 +17,7 @@ public class RoutesConfig {
     @Bean
     public RouteLocator routeLocator(@Value("${endpoint.vocab}") String vocabEndpoint,
                                      @Value("${endpoint.sentence}") String sentenceEndpoint,
+                                     @Value("${endpoint.practice}") String practiceEndpoint,
                                      RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("vocab_route", r -> r
@@ -26,7 +27,11 @@ public class RoutesConfig {
                 .route("sentence_service", r -> r
                         .path("/sentence-service/**")
                         .filters(f -> f.rewritePath("^/sentence-service", ""))
-                        .uri(vocabEndpoint))
+                        .uri(sentenceEndpoint))
+                .route("practice_service", r -> r
+                        .path("/practice-service/**")
+                        .filters(f -> f.rewritePath("^/practice-service", ""))
+                        .uri(practiceEndpoint))
                 .build();
     }
 }

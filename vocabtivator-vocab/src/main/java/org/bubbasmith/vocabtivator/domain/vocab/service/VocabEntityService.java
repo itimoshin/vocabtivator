@@ -26,7 +26,7 @@ public class VocabEntityService {
         VocabTable vocabTable = ofNullable(vocabStorageService.getVocabTable(tableKey))
                 .orElseThrow(() -> new VocabtivatorNotFoundException(format("Vocab table with key %s not found", tableKey)));
         VocabTopic topic = getRandomTopic(vocabTable, topicsNames);
-        return getRandom(topic.getEntities());
+        return getRandom(topic.getEntities()).setTopic(topic.getName());
     }
 
     private VocabTopic getRandomTopic(VocabTable vocabTable, List<String> topicsNames) {

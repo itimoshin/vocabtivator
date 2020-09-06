@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @EnableCaching(proxyTargetClass = true)
-@EnableFeignClients
+@EnableFeignClients(basePackages = "org.bubbasmith.vocabtivator.external")
 public class Beans {
 
     @Bean("htmlRestTemplate")

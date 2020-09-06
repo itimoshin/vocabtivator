@@ -1,7 +1,8 @@
 package org.bubbasmith.vocabtivator.hint;
 
-import org.bubbasmith.vocabtivator.model.dto.HintDTO;
-import org.bubbasmith.vocabtivator.model.vocab.VocabEntity;
+
+import org.bubbasmith.vocabtivator.model.HintDTO;
+import org.bubbasmith.vocabtivator.model.VocabEntity;
 import org.springframework.stereotype.Component;
 
 @Component
