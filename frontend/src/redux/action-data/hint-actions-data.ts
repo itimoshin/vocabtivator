@@ -8,9 +8,9 @@ export class SetHintsActionData extends AbstractAction<Hint[], HintActionType> {
     }
 }
 
-export class ShowHintActionData extends AbstractAction<Hint, HintActionType> {
+export class ClickHintActionData extends AbstractAction<Hint, HintActionType> {
     getType(): HintActionType {
-        return "SHOW_HINT";
+        return "CLICK_HINT";
     }
 }
 

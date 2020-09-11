@@ -1,15 +1,10 @@
 export type HintType = 'FIRST_LETTER' | 'MEANING' | 'TOPIC' | 'ANSWER'
 
-export interface ReduxAction<T> {
-    type: string;
-    data: T
-}
-
 export interface Hint {
     type: HintType;
     text: string;
     hintUi: HintUI;
-    show: boolean;
+    clicks: number;
 }
 
 export interface HintUI {

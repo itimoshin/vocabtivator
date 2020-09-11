@@ -5,7 +5,7 @@ import {bindActionCreators} from "redux";
 import {Hint} from "../../model/models";
 import HintComponent from "./HintComponent";
 import './HintsListComponent.scss'
-import {ShowHintActionData} from "../../redux/action-data/hint-actions-data";
+import {ClickHintActionData} from "../../redux/action-data/hint-actions-data";
 
 const HintsListComponent = (props: { hints: Hint[], [key: string]: any }) => {
 
@@ -13,7 +13,7 @@ const HintsListComponent = (props: { hints: Hint[], [key: string]: any }) => {
         if (e.shiftKey && /Digit\d/.test(e.code)) {
             const idx = Number(e.code[e.code.length - 1]) - 1;
             if (idx <= props.hints.length - 1 && idx >= 0) {
-                props.actions.genericAction(new ShowHintActionData(props.hints[idx]))
+                props.actions.genericAction(new ClickHintActionData(props.hints[idx]))
             }
         }
     }

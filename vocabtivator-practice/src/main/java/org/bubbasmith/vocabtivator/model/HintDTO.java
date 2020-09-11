@@ -11,6 +11,6 @@ public class HintDTO {
     private Type type;
 
     public enum Type {
-        MEANING, FIRST_LETTER, TOPIC, ANSWER
+        MEANING, TOPIC, ANSWER
     }
 }
