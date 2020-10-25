@@ -1,4 +1,4 @@
-package org.bubbasmith.vocabtivator.domain.vocab.service;
+package org.bubbasmith.vocabtivator.common.vocab.service;
 
 import org.bubbasmith.vocabtivator.exception.VocabtivatorNotFoundException;
 import org.bubbasmith.vocabtivator.model.vocab.VocabEntity;

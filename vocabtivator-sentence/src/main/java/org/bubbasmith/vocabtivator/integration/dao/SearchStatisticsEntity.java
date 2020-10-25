@@ -1,4 +1,4 @@
-package org.bubbasmith.vocabtivator.sentence_search.dao;
+package org.bubbasmith.vocabtivator.integration.dao;
 
 
 import lombok.Data;
@@ -10,14 +10,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 import java.util.List;
 
-@Document("sentence")
+@Document("search_statistics")
 @Data
 @Accessors(chain = true)
-public class SentenceEntity {
+public class SearchStatisticsEntity {
 
     @Id
     private ObjectId id;
-    private String text;
     private String vocabWord;
-    private List<String> placeholders;
+    private List<Date> searchDates;
 }

@@ -1,11 +1,11 @@
-package org.bubbasmith.vocabtivator.sentence_search;
+package org.bubbasmith.vocabtivator.integration;
 
 import org.bubbasmith.vocabtivator.model.Sentence;
-import org.bubbasmith.vocabtivator.sentence_search.dao.SearchStatisticsEntity;
-import org.bubbasmith.vocabtivator.sentence_search.dao.SearchStatisticsRepository;
-import org.bubbasmith.vocabtivator.sentence_search.dao.SentenceEntity;
-import org.bubbasmith.vocabtivator.sentence_search.dao.SentenceRepository;
-import org.bubbasmith.vocabtivator.sentence_search.external.ExternalSentencesSearch;
+import org.bubbasmith.vocabtivator.integration.dao.SearchStatisticsEntity;
+import org.bubbasmith.vocabtivator.integration.dao.SearchStatisticsRepository;
+import org.bubbasmith.vocabtivator.integration.dao.SentenceEntity;
+import org.bubbasmith.vocabtivator.integration.dao.SentenceRepository;
+import org.bubbasmith.vocabtivator.integration.external.ExternalSentencesSearch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

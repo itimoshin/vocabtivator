@@ -1,4 +1,4 @@
-package org.bubbasmith.vocabtivator.domain.vocab.service;
+package org.bubbasmith.vocabtivator.common.vocab.service;
 
 import lombok.SneakyThrows;
 import org.apache.poi.ss.usermodel.Cell;
@@ -11,8 +11,8 @@ import org.bubbasmith.vocabtivator.model.dto.CreatedVocabTableDTO;
 import org.bubbasmith.vocabtivator.model.vocab.VocabEntity;
 import org.bubbasmith.vocabtivator.model.vocab.VocabTable;
 import org.bubbasmith.vocabtivator.model.vocab.VocabTopic;
-import org.bubbasmith.vocabtivator.domain.vocab.workbook.generator.GoogleSpreadsheetWorkbookGenerator;
-import org.bubbasmith.vocabtivator.domain.vocab.workbook.generator.MultipartFileWorkbookGenerator;
+import org.bubbasmith.vocabtivator.common.vocab.workbook.generator.GoogleSpreadsheetWorkbookGenerator;
+import org.bubbasmith.vocabtivator.common.vocab.workbook.generator.MultipartFileWorkbookGenerator;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

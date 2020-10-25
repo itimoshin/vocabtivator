@@ -1,4 +1,4 @@
-package org.bubbasmith.vocabtivator.domain.vocab.workbook.generator;
+package org.bubbasmith.vocabtivator.common.vocab.workbook.generator;
 
 import lombok.SneakyThrows;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;

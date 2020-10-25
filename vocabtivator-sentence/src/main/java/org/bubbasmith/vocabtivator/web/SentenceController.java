@@ -1,6 +1,6 @@
 package org.bubbasmith.vocabtivator.web;
 
-import org.bubbasmith.vocabtivator.sentence_search.SentenceService;
+import org.bubbasmith.vocabtivator.integration.SentenceService;
 import org.bubbasmith.vocabtivator.model.Sentence;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

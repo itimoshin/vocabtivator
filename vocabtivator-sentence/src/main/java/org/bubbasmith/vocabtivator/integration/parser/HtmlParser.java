@@ -1,4 +1,4 @@
-package org.bubbasmith.vocabtivator.sentence_search.parser;
+package org.bubbasmith.vocabtivator.integration.parser;
 
 import org.bubbasmith.vocabtivator.model.Sentence;
 

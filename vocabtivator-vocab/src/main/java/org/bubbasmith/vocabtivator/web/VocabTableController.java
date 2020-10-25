@@ -2,8 +2,7 @@ package org.bubbasmith.vocabtivator.web;
 
 import org.bubbasmith.vocabtivator.model.GoogleSpreadsheet;
 import org.bubbasmith.vocabtivator.model.dto.CreatedVocabTableDTO;
-import org.bubbasmith.vocabtivator.domain.vocab.service.VocabTableService;
-import org.bubbasmith.vocabtivator.model.vocab.VocabEntity;
+import org.bubbasmith.vocabtivator.common.vocab.service.VocabTableService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

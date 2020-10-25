@@ -1,6 +1,6 @@
 package org.bubbasmith.vocabtivator.web;
 
-import org.bubbasmith.vocabtivator.domain.vocab.service.VocabEntityService;
+import org.bubbasmith.vocabtivator.common.vocab.service.VocabEntityService;
 import org.bubbasmith.vocabtivator.model.vocab.VocabEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
