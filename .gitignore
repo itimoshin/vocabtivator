@@ -1,5 +1,6 @@
 ### IntelliJ IDEA ###
 .idea
+!.idea/runConfigurations
 *.iws
 *.iml
 *.ipr
@@ -33,3 +34,5 @@ node_modules
 .springBeans
 .sts4-cache
 /frontend/node_modules/
+
+!.idea
