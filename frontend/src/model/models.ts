@@ -3,6 +3,7 @@ export type HintType = 'FIRST_LETTER' | 'MEANING' | 'TOPIC' | 'ANSWER'
 export interface Hint {
     type: HintType;
     text: string;
+    data: string[];
     hintUi: HintUI;
     clicks: number;
 }

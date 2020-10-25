@@ -1,6 +1,6 @@
-package org.bubbasmith.vocabtivator.sentence_search;
+package org.bubbasmith.vocabtivator.integration;
 
-import org.bubbasmith.vocabtivator.model.VocabEntity;
+import org.bubbasmith.vocabtivator.model.VocabDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface VocabServiceClient {
 
     @GetMapping("/vocab-table/{tableKey}/random-word")
-    VocabEntity getRandomWordForTable(@PathVariable String tableKey, @RequestParam String topics) ;
+    VocabDTO getRandomWordForTable(@PathVariable String tableKey, @RequestParam String topics) ;
 }

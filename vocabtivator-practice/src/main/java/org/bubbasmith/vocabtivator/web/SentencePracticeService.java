@@ -1,12 +1,12 @@
 package org.bubbasmith.vocabtivator.web;
 
-import org.bubbasmith.vocabtivator.sentence_search.SentenceServiceClient;
-import org.bubbasmith.vocabtivator.sentence_search.VocabServiceClient;
+import org.bubbasmith.vocabtivator.integration.SentenceServiceClient;
+import org.bubbasmith.vocabtivator.integration.VocabServiceClient;
 import org.bubbasmith.vocabtivator.hint.HintExtractorService;
 import org.bubbasmith.vocabtivator.model.HintDTO;
 import org.bubbasmith.vocabtivator.model.Sentence;
 import org.bubbasmith.vocabtivator.model.SentenceWithHintDTO;
-import org.bubbasmith.vocabtivator.model.VocabEntity;
+import org.bubbasmith.vocabtivator.model.VocabDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +27,7 @@ public class SentencePracticeService {
     }
 
     public SentenceWithHintDTO findSentenceByRandomWord(String tableKey, String topics) {
-        VocabEntity randomWord = vocabServiceClient.getRandomWordForTable(tableKey, topics);
+        VocabDTO randomWord = vocabServiceClient.getRandomWordForTable(tableKey, topics);
         Sentence sentence = sentenceServiceClient.getSentenceForWord(randomWord.getValue());
         List<HintDTO> hints = hintExtractorService.extractHints(randomWord);
         return new SentenceWithHintDTO().setHints(hints).setSentence(sentence);

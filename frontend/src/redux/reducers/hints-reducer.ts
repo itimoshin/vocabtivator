@@ -17,26 +17,35 @@ class HintsReducer extends TypedReducer<Hint[], HintActionType> {
     private setHints(state: Hint[], action: SetHintsActionData): Hint[] {
         const meaningHint = action.data.find(h => h.type === "ANSWER");
         action.data.forEach(h => h.clicks = 0);
+        debugger
         let firstLetterHintInitialValue: Hint = {
             hintUi: {cssClass: 'hint_first_letter', typeName: 'First letters'},
             type: 'FIRST_LETTER',
             clicks: 0,
+            data: HintsReducer.generateNextCharSequence(meaningHint.data[0]),
             text: meaningHint.text.replace(/[a-zA-Z]/g, '_')
         };
+        debugger
         return [...action.data, firstLetterHintInitialValue];
     }
 
     private clickHint(state: Hint[], action: ClickHintActionData): Hint[] {
         const stateClone = [...state];
         const clickedHint = stateClone[state.indexOf(action.data)];
-        const meaningHint = state.find(h => h.type === "ANSWER");
-        clickedHint.clicks++;
-        clickedHint.text = HintsReducer.showNextChar(meaningHint.text, clickedHint.text);
+        clickedHint.text = clickedHint.data[clickedHint.clicks++];
         return stateClone;
     }
 
-    private static showNextChar(fullString: string, currentString: string): string {
-        const indexOfNextChar = currentString.indexOf('_');
-        return currentString.substring(0, indexOfNextChar) + fullString.charAt(indexOfNextChar) + currentString.substring(indexOfNextChar + 1);
+    private static generateNextCharSequence(fullString: string): string[] {
+        const template = fullString.replace(/[a-zA-Z]/g, '_');
+        const result = [template];
+        template.split('').forEach((char, i) => {
+            if(char === '_') {
+                result.push(
+                    result[result.length-1].substring(0, i) + fullString.charAt(i) + result[result.length-1].substring(i + 1)
+                )
+            }
+        });
+        return result.slice(1);
     }
 }

@@ -2,9 +2,9 @@ package org.bubbasmith.vocabtivator.hint;
 
 
 import org.bubbasmith.vocabtivator.model.HintDTO;
-import org.bubbasmith.vocabtivator.model.VocabEntity;
+import org.bubbasmith.vocabtivator.model.VocabDTO;
 
 public interface HintExtractor {
 
-    HintDTO getHint(VocabEntity vocabEntity);
+    HintDTO getHint(VocabDTO vocabDTO);
 }

@@ -2,7 +2,7 @@ package org.bubbasmith.vocabtivator.hint;
 
 
 import org.bubbasmith.vocabtivator.model.HintDTO;
-import org.bubbasmith.vocabtivator.model.VocabEntity;
+import org.bubbasmith.vocabtivator.model.VocabDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,8 +17,8 @@ public class HintExtractorService {
         this.hintExtractors = hintExtractors;
     }
 
-    public List<HintDTO> extractHints(VocabEntity vocabEntity) {
-        return hintExtractors.stream().map(e -> e.getHint(vocabEntity))
-                .filter(h -> !h.getText().isEmpty()).collect(Collectors.toList());
+    public List<HintDTO> extractHints(VocabDTO vocabDTO) {
+        return hintExtractors.stream().map(e -> e.getHint(vocabDTO))
+                .filter(h -> !h.getData().isEmpty()).collect(Collectors.toList());
     }
 }
