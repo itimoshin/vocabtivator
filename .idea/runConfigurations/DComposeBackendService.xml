@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="BackendService" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
+  <configuration default="false" name="DComposeBackendService" type="docker-deploy" factoryName="docker-compose.yml" folderName="DockerCompose" server-name="Docker">
     <deployment type="docker-compose.yml">
       <settings>
         <option name="commandLineOptions" value="--build" />
@@ -12,7 +12,7 @@
       </settings>
     </deployment>
     <method v="2">
-      <option name="RunConfigurationTask" enabled="true" run_configuration_name="backend [clean assemble]" run_configuration_type="GradleRunConfiguration" />
+      <option name="Gradle.BeforeRunTask" enabled="true" tasks="clean assemble" externalProjectPath="$PROJECT_DIR$/backend" vmOptions="" scriptParameters="" />
     </method>
   </configuration>
 </component>

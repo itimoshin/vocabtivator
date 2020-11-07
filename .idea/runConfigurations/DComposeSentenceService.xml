@@ -1,18 +1,18 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="PracticeService" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
+  <configuration default="false" name="DComposeSentenceService" type="docker-deploy" factoryName="docker-compose.yml" folderName="DockerCompose" server-name="Docker">
     <deployment type="docker-compose.yml">
       <settings>
         <option name="commandLineOptions" value="--build" />
         <option name="services">
           <list>
-            <option value="practice-service" />
+            <option value="sentence-service" />
           </list>
         </option>
         <option name="sourceFilePath" value="docker-compose.yml" />
       </settings>
     </deployment>
     <method v="2">
-      <option name="RunConfigurationTask" enabled="true" run_configuration_name="practice [clean assemble]" run_configuration_type="GradleRunConfiguration" />
+      <option name="Gradle.BeforeRunTask" enabled="true" tasks="clean assemble" externalProjectPath="$PROJECT_DIR$/vocabtivator-sentence" vmOptions="" scriptParameters="" />
     </method>
   </configuration>
 </component>

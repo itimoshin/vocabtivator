@@ -1,6 +1,0 @@
-include 'backend'
-findProject(':backend')?.name = 'vocabtivator'
-include 'vocabtivator-sentence'
-include 'vocabtivator-vocab'
-include 'vocabtivator-common'
-

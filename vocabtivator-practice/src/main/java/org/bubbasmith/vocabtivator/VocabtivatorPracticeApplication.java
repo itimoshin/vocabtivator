@@ -6,10 +6,9 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @SpringBootApplication
 @EnableMongoRepositories
-public class VocabtivatorSentenceApplication {
-
+public class VocabtivatorPracticeApplication {
     public static void main(String[] args) {
-        SpringApplication.run(VocabtivatorSentenceApplication.class, args);
+        SpringApplication.run(VocabtivatorPracticeApplication.class, args);
     }
 
 }
