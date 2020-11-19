@@ -1,7 +1,8 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="DockerVocabBackend" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+  <configuration default="false" name="DockerVocabBackend" type="docker-deploy" factoryName="dockerfile" singleton="false" server-name="Docker">
     <deployment type="dockerfile">
       <settings>
+        <option name="imageTag" value="vocabtivator-backend" />
         <option name="buildCliOptions" value="" />
         <option name="command" value="" />
         <option name="containerName" value="vocabtivator-backend" />
@@ -14,7 +15,6 @@
             </DockerEnvVarImpl>
           </list>
         </option>
-        <option name="imageTag" value="vocabtivator-backend" />
         <option name="portBindings">
           <list>
             <DockerPortBindingImpl>

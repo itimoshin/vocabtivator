@@ -11,6 +11,7 @@
       <option name="LOCAL" value="false" />
     </RunnerSettings>
     <method v="2">
+      <option name="Gradle.BeforeRunTask" enabled="true" tasks="clean assemble" externalProjectPath="$PROJECT_DIR$/backend" vmOptions="" scriptParameters="" />
       <option name="com.intellij.docker.debug.DockerBeforeRunTask" run-config="DockerVocabBackend">
         <option name="portMappings">
           <port id="port.debugger" remote="8000" />
