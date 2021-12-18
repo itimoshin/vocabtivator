@@ -19,6 +19,6 @@ public class SentenceController {
 
     @GetMapping
     public Sentence getSentenceForWord(@RequestParam String word) {
-        return sentenceService.getSentenceForWord(word);
+        return sentenceService.getSentenceForWord(word).block();
     }
 }

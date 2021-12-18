@@ -9,6 +9,7 @@ import org.bubbasmith.vocabtivator.integration.external.ExternalSentencesSearch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,34 +34,35 @@ public class SentenceServiceImpl implements SentenceService {
     }
 
     @Override
-    public Sentence getSentenceForWord(String word) {
-        SentenceEntity dbSentence = sentenceRepository.findRandomForWord(word).block();
-        if (dbSentence != null) {
-            incWord(word);
-            return new Sentence()
-                    .setText(dbSentence.getText())
-                    .setPlaceholders(dbSentence.getPlaceholders());
-        } else {
-            LOGGER.info("Sentence for the word '{}' not found, searching in external resources...", word);
-            List<Sentence> sentences = externalSentencesSearch.findSentencesForWord(word);
-            List<SentenceEntity> sentenceEntities = sentences.stream()
-                    .map(s -> new SentenceEntity()
-                            .setText(s.getText())
-                            .setPlaceholders(s.getPlaceholders())
-                            .setVocabWord(word))
-                    .collect(Collectors.toList());
+    public Mono<Sentence> getSentenceForWord(String word) {
+        return sentenceRepository.findRandomForWord(word).flatMap(randomSentence -> {
+            if (randomSentence != null) {
+                return incWordUsageCount(word).thenReturn(new Sentence()
+                        .setText(randomSentence.getText())
+                        .setPlaceholders(randomSentence.getPlaceholders()));
+            } else {
+                LOGGER.info("Sentence for the word '{}' not found, searching in external resources...", word);
+                return Mono.just(externalSentencesSearch.findSentencesForWord(word)).flatMap(sentences -> {
+                    List<SentenceEntity> sentenceEntities = sentences.stream()
+                            .map(s -> new SentenceEntity()
+                                    .setText(s.getText())
+                                    .setPlaceholders(s.getPlaceholders())
+                                    .setVocabWord(word))
+                            .collect(Collectors.toList());
 
-            sentenceRepository.saveAll(sentenceEntities).collectList()
-                    .doOnNext(d -> incWord(word))
-                    .subscribe();
-            return sentences.get(new Random().nextInt(sentences.size()));
-        }
+                    return sentenceRepository.saveAll(sentenceEntities).then(incWordUsageCount(word)).thenReturn(sentences.get(new Random().nextInt(sentences.size())));
+                });
+            }
+        });
     }
 
-    private void incWord(String word) {
-        SearchStatisticsEntity searchStatisticsEntity = searchStatisticsRepository.findByVocabWord(word).blockOptional()
-                .orElse(new SearchStatisticsEntity().setVocabWord(word).setSearchDates(new ArrayList<>()));
-       searchStatisticsEntity.getSearchDates().add(new Date());
-       searchStatisticsRepository.save(searchStatisticsEntity).block();
+    private Mono<SearchStatisticsEntity> incWordUsageCount(String word) {
+        return searchStatisticsRepository.findByVocabWord(word)
+                .or(Mono.just(new SearchStatisticsEntity().setVocabWord(word).setSearchDates(new ArrayList<>())))
+                .map(s -> {
+                    s.getSearchDates().add(new Date());
+                    return s;
+                })
+                .flatMap(searchStatisticsRepository::save);
     }
 }
