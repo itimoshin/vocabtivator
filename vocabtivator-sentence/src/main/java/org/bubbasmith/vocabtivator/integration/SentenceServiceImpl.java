@@ -42,7 +42,7 @@ public class SentenceServiceImpl implements SentenceService {
                         .setPlaceholders(randomSentence.getPlaceholders()));
             } else {
                 LOGGER.info("Sentence for the word '{}' not found, searching in external resources...", word);
-                return Mono.just(externalSentencesSearch.findSentencesForWord(word)).flatMap(sentences -> {
+                return externalSentencesSearch.findSentencesForWord(word).flatMap(sentences -> {
                     List<SentenceEntity> sentenceEntities = sentences.stream()
                             .map(s -> new SentenceEntity()
                                     .setText(s.getText())
@@ -50,7 +50,9 @@ public class SentenceServiceImpl implements SentenceService {
                                     .setVocabWord(word))
                             .collect(Collectors.toList());
 
-                    return sentenceRepository.saveAll(sentenceEntities).then(incWordUsageCount(word)).thenReturn(sentences.get(new Random().nextInt(sentences.size())));
+                    return sentenceRepository.saveAll(sentenceEntities)
+                            .then(incWordUsageCount(word))
+                            .thenReturn(sentences.get(new Random().nextInt(sentences.size())));
                 });
             }
         });
