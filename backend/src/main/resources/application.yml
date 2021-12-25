@@ -4,3 +4,15 @@ endpoint:
   practice: ${env.endpoint.practice}
   vocab: ${env.endpoint.vocab}
   sentence: ${env.endpoint.sentence}
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins: "*"
+            allowed-methods: "*"
+            allowed-headers: "*"
+            allow-credentials: true

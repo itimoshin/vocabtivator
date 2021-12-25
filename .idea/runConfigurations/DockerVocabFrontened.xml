@@ -21,7 +21,7 @@
           <list>
             <DockerVolumeBindingImpl>
               <option name="containerPath" value="/app" />
-              <option name="hostPath" value="%cd%" />
+              <option name="hostPath" value="C:\Users\Ivan\IdeaProjects\vocabtivator\frontend" />
             </DockerVolumeBindingImpl>
           </list>
         </option>
