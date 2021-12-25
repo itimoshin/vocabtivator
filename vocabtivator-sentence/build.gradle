@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.2.6.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
 }
 
 group = 'org.bubbasmith'
@@ -33,6 +34,10 @@ dependencies {
     implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.2'
     implementation group: 'org.odftoolkit', name: 'simple-odf', version: '0.9.0-RC1'
 
+    implementation group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-core'
+    implementation group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-reactive'
+    implementation group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-reactor'
+
     implementation group: 'org.jsoup', name: 'jsoup', version: '1.13.1'
 
 
@@ -45,6 +50,7 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     testImplementation 'io.projectreactor:reactor-test'
+
 }
 test {
     useJUnitPlatform()
